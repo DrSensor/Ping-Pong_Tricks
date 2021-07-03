@@ -1,0 +1,36 @@
+{
+  "dependencies": {
+    "@react-spring/three": "^9.2.3",
+    "@react-three/a11y": "^2.1.0",
+    "@react-three/cannon": "^2.5.0",
+    "@react-three/drei": "^7.0.6",
+    "@react-three/fiber": "^7.0.2",
+    "@react-three/flex": "^0.6.0",
+    "@react-three/lightmap": "^0.0.2",
+    "@react-three/postprocessing": "^2.0.4-alpha.2",
+    "@use-gesture/react": "^10.0.0-beta.16",
+    "color2k": "^1.2.4",
+    "component-material": "^1.0.7",
+    "create-subscription": "^18.0.0-alpha-ed6c091fe-20210701",
+    "immer": "^9.0.3",
+    "react": "^18.0.0-alpha-ed6c091fe-20210701",
+    "react-dom": "^18.0.0-alpha-ed6c091fe-20210701",
+    "react-reconciler": "^0.27.0-alpha-ed6c091fe-20210701",
+    "remeda": "^0.0.28",
+    "scheduler": "^0.21.0-alpha-ed6c091fe-20210701",
+    "three": "^0.129.0",
+    "three-stdlib": "^2.3.0",
+    "use-subscription": "^1.6.0-alpha-ed6c091fe-20210701",
+    "zustand": "^3.5.5"
+  },
+  "devDependencies": {
+    "@react-three/gltfjsx": "^4.2.3",
+    "@types/react-dom": "^17.0.8",
+    "@types/three": "^0.129.2",
+    "@vitejs/plugin-react-refresh": "^1.3.4",
+    "@web/test-runner": "^0.13.13",
+    "leva": "^0.9.13",
+    "r3f-perf": "^4.7.2",
+    "vite": "^2.3.8"
+  }
+}
