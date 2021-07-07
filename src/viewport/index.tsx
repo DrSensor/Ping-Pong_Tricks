@@ -11,7 +11,7 @@ export function Game() {
     return <>
         <Environment.Sunset />
         <Physics>
-            <_3D.Sphere />
+            <_3D.Ball />
             <_3D.Paddle />
             <_3D.FallGround />
         </Physics>

@@ -9,9 +9,7 @@ const { degToRad } = MathUtils;
 import ballHitSound from "../assets/ball-hit.sfx.mp3";
 
 export namespace _3D {
-    export function Sphere(props: SphereProps) {
-        const [ref] = useSphere(_ => ({
-            mass: 1,
+    export function Ball(props: SphereProps) {
         const sound = useRef<THREE.PositionalAudio>();
         const [ref, physics] = useSphere(_ => ({
             position: [0, 5, 0],
@@ -30,7 +28,8 @@ export namespace _3D {
             },
             ...props,
         }));
-        return <mesh ref={ref} scale={.5} castShadow receiveShadow>
+        const { name } = Ball;
+        return <mesh {...{ name, ref }} scale={.5} castShadow receiveShadow>
             <sphereBufferGeometry args={[1, 24, 24]} />
             <PositionalAudio ref={sound} url={ballHitSound} loop={false} />
         </mesh>;
@@ -55,7 +54,8 @@ export namespace _3D {
             physics.velocity.set(mouse.x * mul, 0, -mouse.y * mul);
         });
 
-        return <mesh ref={ref} receiveShadow>
+        const { name } = Paddle;
+        return <mesh {...{ name, ref }} receiveShadow>
             <boxBufferGeometry args={[10, 10, 1]} />
             <meshStandardMaterial color="firebrick" />
         </mesh>;
@@ -68,7 +68,8 @@ export namespace _3D {
             position: [0, -10, 0],
             allowSleep: true,
         }));
-        return <mesh ref={ref} />;
+        const { name } = FallGround;
+        return <mesh {...{ name, ref }} />;
     }
 }
 
