@@ -13,6 +13,7 @@ export function Game() {
         <Physics>
             <_3D.Sphere />
             <_3D.Paddle />
+            <_3D.FallGround />
         </Physics>
         <OrbitControls />
     </>;

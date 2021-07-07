@@ -60,6 +60,16 @@ export namespace _3D {
             <meshStandardMaterial color="firebrick" />
         </mesh>;
     }
+
+    export function FallGround() {
+        const [ref, physics] = usePlane(_ => ({
+            type: "Static",
+            rotation: [degToRad(-90), 0, 0],
+            position: [0, -10, 0],
+            allowSleep: true,
+        }));
+        return <mesh ref={ref} />;
+    }
 }
 
 export namespace _UI {
