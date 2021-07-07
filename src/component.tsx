@@ -1,4 +1,4 @@
-import type { PlaneProps, SphereProps } from "@react-three/cannon";
+import type { PlaneProps, BoxProps, SphereProps } from "@react-three/cannon";
 import { usePlane, useSphere } from "@react-three/cannon";
 import { PositionalAudio } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
@@ -36,11 +36,12 @@ export namespace _3D {
         </mesh>;
     }
 
-    export function Plane(props: PlaneProps) {
-        const [ref, physics] = usePlane(_ => ({
+    export function Paddle(props: BoxProps) {
+        const [ref, physics] = useBox(_ => ({
             type: "Kinematic",
             rotation: [degToRad(-90), 0, degToRad(50)],
             allowSleep: true,
+            args: [10, 10, 1],
             material: {
                 restitution: .4,
                 friction: 1,
@@ -54,8 +55,8 @@ export namespace _3D {
             physics.velocity.set(mouse.x * mul, 0, -mouse.y * mul);
         });
 
-        return <mesh ref={ref} scale={10} receiveShadow>
-            <planeBufferGeometry />
+        return <mesh ref={ref} receiveShadow>
+            <boxBufferGeometry args={[10, 10, 1]} />
             <meshStandardMaterial color="firebrick" />
         </mesh>;
     }

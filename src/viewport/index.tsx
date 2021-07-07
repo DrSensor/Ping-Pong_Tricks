@@ -12,7 +12,7 @@ export function Game() {
         <Environment.Sunset />
         <Physics>
             <_3D.Sphere />
-            <_3D.Plane />
+            <_3D.Paddle />
         </Physics>
         <OrbitControls />
     </>;
