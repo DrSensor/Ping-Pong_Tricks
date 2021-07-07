@@ -1,12 +1,13 @@
 import type { PlaneProps, BoxProps, SphereProps } from "@react-three/cannon";
 import { usePlane, useSphere } from "@react-three/cannon";
-import { PositionalAudio } from "@react-three/drei";
+import { useTexture, PositionalAudio } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { Color, MathUtils, Vector2, Vector3 } from "three";
 const { degToRad } = MathUtils;
 
 import ballHitSound from "../assets/ball-hit.sfx.mp3";
+import ballTexture from "../assets/ball.tex.jpg";
 
 export namespace _3D {
     export function Ball(props: SphereProps) {
@@ -18,6 +19,16 @@ export namespace _3D {
                 friction: .7,
             },
             onCollide({ body, contact: { impactVelocity } }) {
+                if (body.name === FallGround.name) { // This is usually bad practice
+                    // should be implemented in <Fallground /> component
+                    // or separate System (in term of ECS)
+                    // not in other component
+                    physics.position.set(0, 5, 0);
+                    physics.velocity.set(0, 0, 0);
+                    physics.angularVelocity.set(0, 0, 0);
+                    console.debug("gameover");
+                    return;
+                }
                 if (impactVelocity > .3) { // TODO: lowpassFilter(impactVelocity)
                     const { current: sfx } = sound;
                     if (sfx.isPlaying) sfx.stop();
@@ -28,9 +39,11 @@ export namespace _3D {
             },
             ...props,
         }));
+        const map = useTexture(ballTexture);
         const { name } = Ball;
         return <mesh {...{ name, ref }} scale={.5} castShadow receiveShadow>
             <sphereBufferGeometry args={[1, 24, 24]} />
+            <meshStandardMaterial map={map} color="orange" />
             <PositionalAudio ref={sound} url={ballHitSound} loop={false} />
         </mesh>;
     }
@@ -67,6 +80,7 @@ export namespace _3D {
             rotation: [degToRad(-90), 0, 0],
             position: [0, -10, 0],
             allowSleep: true,
+            // WARN: onCollide can't manipulate physics of other collided body, only geometry
         }));
         const { name } = FallGround;
         return <mesh {...{ name, ref }} />;
