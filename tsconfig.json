@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "types": [
+      "vite/types/importMeta",
+      "vite/client",
+      "@react-three/fiber"
+    ],
+    "esModuleInterop": true
+  }
+}
