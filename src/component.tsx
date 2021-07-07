@@ -1,7 +1,7 @@
 import type { PlaneProps, SphereProps } from "@react-three/cannon";
 import { usePlane, useSphere } from "@react-three/cannon";
 import { PositionalAudio } from "@react-three/drei";
-import {} from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import { Color, MathUtils, Vector2, Vector3 } from "three";
 const { degToRad } = MathUtils;
@@ -37,7 +37,8 @@ export namespace _3D {
     }
 
     export function Plane(props: PlaneProps) {
-        const [ref] = usePlane(_ => ({
+        const [ref, physics] = usePlane(_ => ({
+            type: "Kinematic",
             rotation: [degToRad(-90), 0, degToRad(50)],
             allowSleep: true,
             material: {
@@ -46,6 +47,13 @@ export namespace _3D {
             },
             ...props,
         }));
+
+        useFrame(({ mouse, clock }) => {
+            const mul = 10;
+            mouse.lerp(mouse, 1. - (.001 ** clock.getDelta()));
+            physics.velocity.set(mouse.x * mul, 0, -mouse.y * mul);
+        });
+
         return <mesh ref={ref} scale={10} receiveShadow>
             <planeBufferGeometry />
             <meshStandardMaterial color="firebrick" />
